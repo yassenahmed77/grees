@@ -1,0 +1,414 @@
+/* ==========================================================================
+   GREES - HEADER STYLES (OPTICALLY & MATHEMATICALLY CENTERED)
+   ========================================================================== */
+
+.grees-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: transparent;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 1.25rem 3rem;
+}
+
+.grees-header.scrolled {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.85rem 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.grees-header-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 48px;
+}
+
+/* --------------------------------------------------------------------------
+   1. LEFT: DESKTOP NAV LINKS & BURGER
+   -------------------------------------------------------------------------- */
+.header-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  z-index: 2;
+}
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+}
+
+.nav-link {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.94rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #1a1a1a;
+  text-decoration: none;
+  position: relative;
+  padding: 0.35rem 0;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: #3f3126;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover {
+  color: #3f3126;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  font-weight: 600;
+  color: #2b221a;
+}
+
+/* --------------------------------------------------------------------------
+   2. CENTER: LOGO (DEAD CENTER - HORIZONTAL & VERTICAL)
+   -------------------------------------------------------------------------- */
+.header-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: auto;
+  line-height: 1;
+}
+
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  line-height: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.brand-logo-link:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.brand-logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.brand-logo-img.white-logo {
+  display: none;
+}
+
+.brand-logo-img.dark-logo {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   3. RIGHT: PROFILE & CART
+   -------------------------------------------------------------------------- */
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 1.25rem;
+  z-index: 2;
+}
+
+.header-icon-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.45rem;
+  color: #1f1a16;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1;
+}
+
+.header-icon-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+  transform: translateY(-1px);
+}
+
+.header-icon-btn svg {
+  display: block;
+}
+
+.cart-btn {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #3f3126;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE BURGER BUTTON & RESPONSIVENESS
+   -------------------------------------------------------------------------- */
+.mobile-burger-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.45rem;
+  color: #1f1a16;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  line-height: 1;
+}
+
+.mobile-burger-btn svg {
+  display: block;
+}
+
+.mobile-burger-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 900px) {
+  .grees-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .grees-header.scrolled {
+    padding: 0.85rem 1.25rem;
+  }
+
+  .mobile-burger-btn {
+    display: inline-flex;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .desktop-search-btn {
+    display: none !important;
+  }
+
+  .brand-logo-img {
+    height: 23px;
+  }
+
+  .header-right {
+    gap: 0.75rem;
+  }
+
+  .header-icon-btn {
+    padding: 0.4rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE DRAWER & SEARCH
+   -------------------------------------------------------------------------- */
+.mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 84%;
+  max-width: 360px;
+  background: #ffffff;
+  z-index: 201;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem 1.5rem 2rem 1.5rem;
+}
+
+.mobile-menu-drawer.open {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #f0ede9;
+}
+
+.mobile-drawer-logo {
+  height: 20px;
+  width: auto;
+}
+
+.mobile-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  color: #1a1a1a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-drawer-search {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #f7f5f2;
+  border: 1px solid #e8e4df;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  margin: 1.25rem 0 0.75rem 0;
+}
+
+.drawer-search-icon {
+  color: #7a726b;
+  flex-shrink: 0;
+}
+
+.mobile-drawer-search input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: #1a1a1a;
+}
+
+.mobile-drawer-search input::placeholder {
+  color: #999;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  gap: 0.4rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 500;
+  color: #2b221a;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+  background: #f7f5f2;
+  color: #000;
+  font-weight: 600;
+}
+
+.mobile-nav-item .arrow-icon {
+  opacity: 0.4;
+  transition: transform 0.2s ease;
+}
+
+.mobile-nav-item:hover .arrow-icon {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.mobile-drawer-footer {
+  padding-top: 1.25rem;
+  border-top: 1px solid #f0ede9;
+}
+
+.mobile-account-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #3f3126;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.mobile-copyright {
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  color: #999;
+}
