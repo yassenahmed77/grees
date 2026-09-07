@@ -1,12 +1,37 @@
 @import "tailwindcss";
 
 @theme {
+  /* Clean, modern, non-Greek typography */
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Cinzel', serif;
-  --font-cinzel: 'Cinzel', serif;
-  --color-grees-dark: #1f1a16;
-  --color-grees-accent: #3f3126;
-  --color-grees-sand: #f7f5f0;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+
+  /* GREES Brand Color Palette:
+     - Inspired directly by the bottle glass, wooden cap, gold logo/emblem, and warm packaging */
+  
+  /* 1. Base Cream & Linen (Packaging & Backgrounds) */
+  --color-grees-cream: #faf7f2;
+  --color-grees-cream-light: #fffdf9;
+  --color-grees-cream-surface: #f3ece2;
+  --color-grees-cream-border: #e8ded3;
+  --color-grees-cream-muted: #8e8275;
+
+  /* 2. Greek Warm Gold (Logo, foil accents & buttons) */
+  --color-grees-gold: #c5a059;
+  --color-grees-gold-light: #dfc794;
+  --color-grees-gold-dark: #9a7736;
+  --color-grees-gold-glow: #f1e5cb;
+
+  /* 3. Smoked Wood & Charcoal (Textured Wooden Cap, Bold Headings) */
+  --color-grees-wood: #1e1712;
+  --color-grees-wood-light: #2e241d;
+  --color-grees-wood-muted: #544436;
+
+  /* 4. Amber Glow (Perfume juice warmth) */
+  --color-grees-amber: #c97d32;
+  --color-grees-amber-light: #ebb67b;
+
+  /* 5. Semantic Accent */
+  --color-grees-sage: #3f5e4d;
 }
 
 *, *::before, *::after {
@@ -15,8 +40,8 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #faf9f6;
-  color: #1f1a16;
+  background-color: var(--color-grees-cream);
+  color: var(--color-grees-wood);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

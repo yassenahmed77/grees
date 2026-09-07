@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Search, ShoppingBag, User, Menu, X, ArrowRight } from 'lucide-react';
 
 export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
@@ -6,12 +7,16 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState('Home');
   const [searchQuery, setSearchQuery] = useState('');
+  const location = useLocation();
+
+  const isHome = location.pathname === '/';
+  const showSolidHeader = !isHome || isScrolled;
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'For Him', href: '#for-him' },
-    { name: 'For Her', href: '#for-her' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'For Him', href: '/#for-him' },
+    { name: 'For Her', href: '/#for-her' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   useEffect(() => {
@@ -32,8 +37,8 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
     <>
       <header 
         className={`w-full z-40 transition-all duration-300 ${
-          isScrolled 
-            ? 'fixed top-0 left-0 bg-[#faf8f5]/90 backdrop-blur-md shadow-sm border-b border-[#2a211b]/10 py-3 px-5 sm:px-8 md:px-12' 
+          showSolidHeader 
+            ? 'fixed top-0 left-0 bg-grees-cream/95 backdrop-blur-md shadow-xs border-b border-grees-cream-border py-3 px-5 sm:px-8 md:px-12' 
             : 'absolute top-0 left-0 bg-transparent py-4 md:py-6 px-5 sm:px-8 md:px-12'
         }`}
       >
@@ -44,8 +49,8 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
             {/* Mobile Hamburger Button */}
             <button 
               className={`md:hidden p-2 -ml-2 rounded-lg transition-colors flex items-center justify-center cursor-pointer ${
-                isScrolled 
-                  ? 'text-[#2a211b] hover:bg-[#2a211b]/10' 
+                showSolidHeader 
+                  ? 'text-grees-wood hover:bg-grees-cream-surface' 
                   : 'text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)] hover:bg-white/10'
               }`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -54,64 +59,64 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
 
-            {/* Desktop Navigation with Luxury Marcellus Typography */}
+            {/* Desktop Navigation with Clean Modern Typography */}
             <nav className="hidden md:flex items-center gap-7 lg:gap-10" aria-label="Main Navigation">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
-                  className={`font-['Marcellus',serif] text-[14.5px] tracking-[0.16em] uppercase transition-all duration-200 relative py-1 ${
-                    isScrolled
+                  to={link.href}
+                  className={`font-display text-[13.5px] tracking-[0.15em] uppercase transition-all duration-200 relative py-1 ${
+                    showSolidHeader
                       ? activeLink === link.name 
-                        ? 'font-bold text-[#1a130e]' 
-                        : 'font-semibold text-[#2a211b]/90 hover:text-[#1a130e]'
+                        ? 'font-semibold text-grees-wood' 
+                        : 'font-normal text-grees-wood-light/80 hover:text-grees-wood'
                       : activeLink === link.name
-                        ? 'font-bold text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]'
-                        : 'font-semibold text-white/95 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] hover:text-white'
+                        ? 'font-semibold text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]'
+                        : 'font-normal text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] hover:text-white'
                   }`}
                   onClick={() => setActiveLink(link.name)}
                 >
                   {link.name}
                   <span 
                     className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 ${
-                      isScrolled ? 'bg-[#2a211b]' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
+                      showSolidHeader ? 'bg-grees-gold' : 'bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
                     } ${activeLink === link.name ? 'w-full' : 'w-0 hover:w-full'}`} 
                   />
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
 
-          {/* 2. CENTER: LOGO (WHITE LOGO ON HERO, DARK LOGO ON SCROLL) */}
+          {/* 2. CENTER: LOGO */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-10 pointer-events-auto">
-            <a 
-              href="#" 
+            <Link 
+              to="/" 
               className="inline-flex items-center justify-center transition-transform duration-200 hover:opacity-90 hover:-translate-y-0.5" 
               aria-label="GREES Home"
             >
-              {isScrolled ? (
+              {showSolidHeader ? (
                 <img 
-                  src="/logo.png?v=2" 
+                  src="/logo.png?v=3" 
                   alt="GREES" 
-                  className="h-[20px] md:h-[25px] w-auto block object-contain select-none"
+                  className="h-[22px] md:h-[28px] w-auto block object-contain select-none"
                 />
               ) : (
                 <img 
-                  src="/logo-white.png?v=2" 
+                  src="/logo-white.png?v=3" 
                   alt="GREES" 
-                  className="h-[20px] md:h-[25px] w-auto block object-contain select-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]"
+                  className="h-[22px] md:h-[28px] w-auto block object-contain select-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
                 />
               )}
-            </a>
+            </Link>
           </div>
 
-          {/* 3. RIGHT: ICONS (WHITE ON HERO, DARK ON SCROLL) */}
+          {/* 3. RIGHT: ICONS */}
           <div className="flex items-center justify-end gap-2 sm:gap-3 md:gap-4 z-10">
             {/* Search (Desktop only) */}
             <button 
               className={`hidden md:inline-flex p-2 rounded-full transition-all duration-200 hover:-translate-y-0.5 cursor-pointer ${
-                isScrolled 
-                  ? 'text-[#2a211b] hover:bg-[#2a211b]/10' 
+                showSolidHeader 
+                  ? 'text-grees-wood hover:bg-grees-cream-surface' 
                   : 'text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] hover:bg-white/10'
               }`}
               onClick={onSearchClick}
@@ -124,8 +129,8 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
             {/* Profile */}
             <button 
               className={`p-2 rounded-full transition-all duration-200 hover:-translate-y-0.5 cursor-pointer ${
-                isScrolled 
-                  ? 'text-[#2a211b] hover:bg-[#2a211b]/10' 
+                showSolidHeader 
+                  ? 'text-grees-wood hover:bg-grees-cream-surface' 
                   : 'text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] hover:bg-white/10'
               }`}
               aria-label="User account"
@@ -137,8 +142,8 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
             {/* Cart */}
             <button 
               className={`p-2 rounded-full transition-all duration-200 hover:-translate-y-0.5 relative cursor-pointer ${
-                isScrolled 
-                  ? 'text-[#2a211b] hover:bg-[#2a211b]/10' 
+                showSolidHeader 
+                  ? 'text-grees-wood hover:bg-grees-cream-surface' 
                   : 'text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] hover:bg-white/10'
               }`}
               onClick={onCartClick}
@@ -148,7 +153,7 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
               <ShoppingBag size={20} strokeWidth={2} />
               {cartCount > 0 && (
                 <span className={`absolute top-0.5 right-0.5 text-[10px] font-bold min-w-[17px] h-[17px] rounded-full flex items-center justify-center px-1 ${
-                  isScrolled ? 'bg-[#2a211b] text-[#faf8f5]' : 'bg-white text-[#2a211b] shadow-sm'
+                  showSolidHeader ? 'bg-grees-gold text-grees-wood' : 'bg-white text-grees-wood shadow-sm'
                 }`}>
                   {cartCount}
                 </span>
@@ -174,7 +179,7 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
         }`}
       >
         <div className="flex items-center justify-between pb-5 border-b border-[#2a211b]/10">
-          <img src="/logo.png?v=2" alt="GREES" className="h-5 w-auto" />
+          <img src="/logo.png?v=3" alt="GREES" className="h-6 w-auto object-contain" />
           <button 
             className="p-1.5 text-[#2a211b] hover:bg-[#2a211b]/10 rounded-full transition-colors cursor-pointer"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -185,14 +190,14 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
         </div>
 
         {/* Search inside Mobile Drawer */}
-        <form className="my-5 flex items-center gap-2.5 bg-white border border-[#2a211b]/15 rounded-full px-4 py-2.5 shadow-xs" onSubmit={handleMobileSearch}>
-          <Search size={17} className="text-[#2a211b]/60 shrink-0" />
+        <form className="my-5 flex items-center gap-2.5 bg-white border border-grees-cream-border rounded-full px-4 py-2.5 shadow-xs" onSubmit={handleMobileSearch}>
+          <Search size={17} className="text-grees-wood-muted shrink-0" />
           <input 
             type="text" 
             placeholder="Search fragrances..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-transparent border-none outline-none text-sm text-[#2a211b] placeholder:text-[#2a211b]/40 font-['Marcellus',serif] tracking-wider"
+            className="w-full bg-transparent border-none outline-none text-sm text-grees-wood placeholder:text-grees-cream-muted font-sans"
           />
         </form>
 
@@ -202,10 +207,10 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
             <a
               key={link.name}
               href={link.href}
-              className={`flex items-center justify-between px-3.5 py-3 rounded-lg font-['Marcellus',serif] text-[14px] tracking-[0.14em] uppercase transition-colors ${
+              className={`flex items-center justify-between px-3.5 py-3 rounded-lg font-display text-[13px] tracking-[0.14em] uppercase transition-colors ${
                 activeLink === link.name 
-                  ? 'bg-[#2a211b]/10 text-[#1a130e] font-bold' 
-                  : 'text-[#2a211b]/80 hover:bg-[#2a211b]/5 hover:text-[#1a130e] font-semibold'
+                  ? 'bg-grees-cream-surface text-grees-wood font-semibold' 
+                  : 'text-grees-wood-light/80 hover:bg-grees-cream-surface/60 hover:text-grees-wood font-normal'
               }`}
               onClick={() => {
                 setActiveLink(link.name);
@@ -213,18 +218,18 @@ export default function Header({ cartCount = 0, onCartClick, onSearchClick }) {
               }}
             >
               <span>{link.name}</span>
-              <ArrowRight size={15} className="text-[#2a211b]/40" />
+              <ArrowRight size={15} className="text-grees-cream-muted" />
             </a>
           ))}
         </nav>
 
         {/* Footer */}
-        <div className="pt-4 border-t border-[#2a211b]/10">
-          <div className="flex items-center gap-2.5 text-xs font-['Marcellus',serif] tracking-wider uppercase text-[#2a211b] py-2 cursor-pointer hover:text-[#1a130e] transition-colors">
+        <div className="pt-4 border-t border-grees-cream-border">
+          <div className="flex items-center gap-2.5 text-xs font-display tracking-wider uppercase text-grees-wood py-2 cursor-pointer hover:text-grees-gold transition-colors">
             <User size={16} />
             <span>My Account / Sign In</span>
           </div>
-          <p className="mt-3 text-[11px] font-['Marcellus',serif] tracking-widest text-[#2a211b]/50">© {new Date().getFullYear()} GREES PARFUMS</p>
+          <p className="mt-3 text-[11px] font-display tracking-widest text-grees-cream-muted">© {new Date().getFullYear()} GREES PARFUMS</p>
         </div>
       </div>
     </>
