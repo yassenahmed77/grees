@@ -53,7 +53,7 @@ export const products = [
   {
     id: 'vulcan',
     name: 'VULCAN',
-    inspiredBy: 'Stéphane Humbert Lucas — God of Fire',
+    inspiredBy: 'Stéphane Lucas — God of Fire',
     concentration: 'Extrait de Parfum',
     price50ml: '1,550',
     originalPrice50ml: '1,950',
